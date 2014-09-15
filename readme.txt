@@ -175,15 +175,9 @@ No. Document Importer by Plugmatter has been specifically developed to work with
 
 ### Version 1.0 ###
 
-
-
-
-
 ### Version 1.0 ###
 
 ### Version 1.0 ###
-
-## Version 1.0 ##
 
 == Upgrade Notice ==
 There's a new version of Plugmatter Document Importer Lite i.e., version 1.0
