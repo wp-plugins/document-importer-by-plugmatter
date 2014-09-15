@@ -173,6 +173,10 @@ No. Document Importer by Plugmatter has been specifically developed to work with
 
 == Changelog ==
 
+### Version 1.0 ###
+
+
+
 
 
 ### Version 1.0 ###
