@@ -1,0 +1,131 @@
+table p {	
+	font-size: 17px;
+}
+
+.pmdi_body {
+    margin-right:20px;
+    margin-top:15px;
+}
+
+.pmdi_wrap {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+#settings_header p {
+	font-size:30px;
+	font-weight:bold;
+}
+
+.pmdi_settings_btn, .pm_primary_buttons {
+    margin-top:10px;
+	-moz-user-select: none;
+    background-color: #CF1626;
+    background-image: -moz-linear-gradient(center top , #CF1626, #AE1F1F);
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 2px 2px 2px 2px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: bold;
+    min-width: 46px;
+    padding: 10px 26px;
+    text-align: center;
+    text-shadow: 0 1px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    transition: all 0.218s ease 0s;
+}
+
+.pm_primary_buttons {
+    font-size: 15px;
+    padding: 10px;
+}
+
+.pm_msg_error {
+    background:#fff3f3;
+    padding:10px;
+    margin:10px;
+    border:1px solid #ff0000;
+}
+
+.pm_msg_success {
+    background:#ecffd8;
+    padding:10px;
+    margin:10px;
+    border:1px solid #b0d38b;
+}
+
+.pmdi_headbar {
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background:#CF1626;
+    height:50px;
+    clear:both
+}
+
+.pmdi_pagetitle {
+    float:left;
+    width:500px;
+    padding-left:20px;
+    color:#fff;
+}
+
+.pmdi_pagetitle h2 {
+    font-weight:bold;
+    font-family: 'Fauna One', serif;
+    color:#ffffff;
+}
+
+.pmdi_logodiv {
+    float:right;
+    width:320px;
+    padding-top:10px;
+}
+
+.pmdi_google_head {
+    color: #333333;
+    font-size: 18px;
+    padding-top: 5px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+.pmdi_dropbox_head {
+    margin-top: 45px;
+    margin-bottom: 20px;
+    color: #333333;     
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+.pmdi_settings_table {
+    padding-left: 20px;
+}
+
+.pmdi_settings_table input[type="text"] {
+    padding:6px;
+    font-size: 17px;
+}
+
+.pmdi_settings_table td:nth-child(2){
+   width: 90px;
+   text-align:center;
+}
+
+.pm_success {
+    margin-top:15px !important;
+}
+
+.plug_enable_lable {
+    width:300px;
+    float:left;
+    font-size:17px;
+    padding-top:5px;
+    color:#333333;
+}

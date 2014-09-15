@@ -1,0 +1,91 @@
+#plugmatter_import_docx, #google_btn, #dropbox_btn, #google_btn_dis, #dropbox_btn_dis, #plugmatter_import_docx_dis {    
+    width: 50px;
+    height: 43px;
+    border: 0;
+    margin-left: 12px;
+	opacity: 0.85;
+}
+
+#google_btn_dis, #dropbox_btn_dis, #plugmatter_import_docx_dis {
+	opacity: 0.4;
+}
+
+.pmdi_inside label {
+	margin-left: 4px;
+}
+
+#google_btn, #dropbox_btn, #google_btn_dis, #dropbox_btn_dis {
+	margin-left: 35px;
+}
+
+#plugmatter_import_docx:hover, #google_btn:hover, #dropbox_btn:hover {
+	opacity: 1.0;
+	cursor: pointer;
+	cursor: hand;
+}
+
+#pmdi_names p {
+	font-size: 13px;
+	color: #0099D5;
+	float: left;
+	margin:0;
+	margin-left:8px;
+}
+
+#pmdi_names #pmdi_google_p{
+	margin-left:19px;
+}
+
+#pmdi_names #pmdi_dropbox_p {
+	margin-left:20px;
+}
+
+.pmdi_inside {
+	margin-top: 10px;
+	margin-bottom: 32px;
+	background-color: white;
+}
+
+#pmdi_half_banner {
+	margin: -8px -11px -12px;
+    position: relative;
+    top: 4px;
+    width: 109%;
+}
+
+#poststuff .inside {
+    /*padding: 0 !important;*/
+}
+
+#pmdi_loading {
+	height:15px;
+}
+
+.pmdi_loading_pro {
+	height: 25px !important;
+}
+
+#pmdi_update_msg {
+	font-size: 12px;
+	margin-top: 15px 0px;
+	text-align: center;
+	color: gray;
+}
+
+#pmdi_loading p {
+	margin: 0px;
+}
+
+#pmdi_update_msg a {
+	color: #CF1626;
+}
+
+img#loading {
+	display: none;
+	margin-top: 15px;
+	margin-left: 71px; 
+}
+
+#pmdi_names .pmdi_p_gray {
+    color: gray;
+}
