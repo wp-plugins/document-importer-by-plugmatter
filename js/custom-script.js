@@ -1,6 +1,6 @@
 jQuery(document).ready(function($) {
     $("body").append("<form name='docx_uploader' target='upload_iframe' id='frm_uploader' method='post' action='admin-ajax.php?action=upload_docx' enctype='multipart/form-data'>");
-    $("#frm_uploader").append("<input type='file' id='plugmatter_browse_docx' name='plugmatter_browse_docx' style='display:none;'>");
+    $("#frm_uploader").append("<div style='position:absolute;top:-100px;'><input type='file' id='plugmatter_browse_docx' name='plugmatter_browse_docx'></div>");
     $("#frm_uploader").append("<div id='upload'></div>");
 
     $("#plugmatter_browse_docx").change(function(event) {
