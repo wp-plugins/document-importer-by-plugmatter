@@ -173,6 +173,8 @@ No. Document Importer by Plugmatter has been specifically developed to work with
 
 == Changelog ==
 
+
+
 ### Version 1.2 ###
 
 Fixed the Auto-update error!
