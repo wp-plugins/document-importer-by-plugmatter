@@ -23,7 +23,7 @@ With Plugmatter Document Importer, you no longer have to:
 Note: It only imports .docx files.
 
 <h3>How It Works?</h3>
-After you install the plugin, a plugin widget appears right above your “Publish” Widget in a New Post. Just import your MS Word file or any other document in our plugin and atch the plugin do its work. It will paste the content "EXACTLY" how it is in your document.
+After you install the plugin, a plugin widget appears right above your "Publish" Widget in a New Post. Just import your MS Word file or any other document in our plugin and atch the plugin do its work. It will paste the content "EXACTLY" how it is in your document.
 
 You can select your word documents i.e. MS Word, Libera, OpenOffice files from: 
 
@@ -31,13 +31,13 @@ You can select your word documents i.e. MS Word, Libera, OpenOffice files from:
 2. Google Drive
 3. Dropbox
 
-Note: The Word documents must be in ‘.docx’ file format and not ‘.doc’ format for them to get uploaded effectively.
+Note: The Word documents must be in '.docx' file format and not '.doc' format for them to get uploaded effectively.
 
 <h3>Who is Plugmatter Document Importer For?</h3>
 For every WordPress use Microsoft Word and Google Docs to create content.
 
 <h3>Support</h3>
-For any help or support requests, please email us at support@plugmatter.com with Subject: "WordPress Document Importer- Your Problem”
+For any help or support requests, please email us at support@plugmatter.com with Subject: "WordPress Document Importer- Your Problem"
 
 == Installation ==
 
