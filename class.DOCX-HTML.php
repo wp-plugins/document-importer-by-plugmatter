@@ -182,7 +182,7 @@ class DOC_CONVERTER {
             }
         }        
         
-        include( plugin_dir_path( __FILE__ ) . '/simple_html_dom.php');
+        require_once( plugin_dir_path( __FILE__ ) . '/simple_html_dom.php');
         $html = str_get_html($htmloutput);
 
         foreach($html->find('a') as $a) {    

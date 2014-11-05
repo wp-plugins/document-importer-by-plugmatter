@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Document Importer Lite
 Plugin URI: http://plugmatter.com/
 Description: The simplest and quickest way to import your docx files into WordPress Editor without losing the document formatting. Spend more time writing and not formatting it in WordPress editor.
 Author: Plugmatter
-Version: 1.4.1
+Version: 1.4.2
 Author URI: http://plugmatter.com/document-importer
 */
 
@@ -61,9 +61,9 @@ function pmdi_plugin_settings() {
 
 function pmdi_settings_page(){
 	if(get_option('Plugmatter_di_License') == "") {
-   		include( plugin_dir_path( __FILE__ ) . 'license.php');
+   		require_once( plugin_dir_path( __FILE__ ) . 'license.php');
    	} else {   		
-   		include( plugin_dir_path( __FILE__ ) . 'pmdi_settings.php');
+   		require_once( plugin_dir_path( __FILE__ ) . 'pmdi_settings.php');
    	}
 }
 
@@ -97,9 +97,9 @@ function pmdi_meta_box() {
 
 function pmdi_google_file_download() {
 	$file_id = $_POST['file_id'];
-	include( plugin_dir_path( __FILE__ ) . 'google_auth/src/Google_Client.php');
-	include( plugin_dir_path( __FILE__ ) . 'google_auth/src/contrib/Google_DriveService.php');
-	include( plugin_dir_path( __FILE__ ) . 'google_auth/src/contrib/Google_Oauth2Service.php');
+	require_once( plugin_dir_path( __FILE__ ) . 'google_auth/src/Google_Client.php');
+	require_once( plugin_dir_path( __FILE__ ) . 'google_auth/src/contrib/Google_DriveService.php');
+	require_once( plugin_dir_path( __FILE__ ) . 'google_auth/src/contrib/Google_Oauth2Service.php');
 	$google_client_id = get_option('wpmdi_client_id');
 	$google_secret_id = get_option('wpmdi_client_secret');
 	//$google_redirect_uri = get_option('wpmdi_redirect_uri');
@@ -128,7 +128,7 @@ function pmdi_google_file_download() {
 	if(isset($_GET['code'])) {
 		echo "<div style='margin:auto;margin: 40% auto auto; font-family: arial ,sans-serif; text-align: center;font-size:12px;color:gray;'><p>PROCESSING DOCUMENT</p><img id='' src='". plugins_url('/images/loading.GIF', __FILE__) ."' /></div>";       	       			
 		$client->setAccessToken($client->getAccessToken($_SESSION['token']));	
-		include( plugin_dir_path( __FILE__ ) . '/simple_html_dom.php');
+		require_once( plugin_dir_path( __FILE__ ) . '/simple_html_dom.php');
 		$html_str = downloadFile($service, $_GET['state']);		
 		$html = str_get_html($html_str);
 		$i = 1;
@@ -347,7 +347,7 @@ function pmdi_dropbox_file_download() {
 	fclose($fp);
 	chmod($file, 0777);
 	if($file) {
-			include( plugin_dir_path( __FILE__ ) . '/class.DOCX-HTML.php');				
+			require_once( plugin_dir_path( __FILE__ ) . '/class.DOCX-HTML.php');				
 			$extract = new DOC_CONVERTER();
 			$extract->docxPath = $file;
     		$extract->Init();
@@ -381,7 +381,7 @@ function local_file_upload() {
     		if($movefile["error"]) {
     			echo "Error:". $movefile;
     		} else {    						
-				include( plugin_dir_path( __FILE__ ) . '/class.DOCX-HTML.php');				
+				require_once( plugin_dir_path( __FILE__ ) . '/class.DOCX-HTML.php');				
 				$extract = new DOC_CONVERTER();
     			$extract->docxPath = $movefile["file"];
     			$extract->Init();    			
