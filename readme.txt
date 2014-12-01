@@ -104,6 +104,10 @@ No. Document Importer by Plugmatter has been specifically developed to work with
 
 Namespace added to Simple HTML DOM class.
 
+### Version 1.4.3 ###
+
+Namespace added to Simple HTML DOM class.
+
 ### Version 1.4.2 ###
 
 Fixed the conflict issue from other WordPresss plugins.
