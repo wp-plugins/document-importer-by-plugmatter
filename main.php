@@ -128,9 +128,9 @@ function pmdi_google_file_download() {
 	if(isset($_GET['code'])) {
 		echo "<div style='margin:auto;margin: 40% auto auto; font-family: arial ,sans-serif; text-align: center;font-size:12px;color:gray;'><p>PROCESSING DOCUMENT</p><img id='' src='". plugins_url('/images/loading.GIF', __FILE__) ."' /></div>";       	       			
 		$client->setAccessToken($client->getAccessToken($_SESSION['token']));	
-		require_once( plugin_dir_path( __FILE__ ) . '/simple_html_dom.php');
+		require_once( plugin_dir_path( __FILE__ ) . '/pmpt_simple_html_dom.php');
 		$html_str = downloadFile($service, $_GET['state']);		
-		$html = str_get_html($html_str);
+		$html = pmpt_str_get_html($html_str);
 		$i = 1;
 		$time = time();
 		// Find all images
@@ -162,7 +162,7 @@ function pmdi_google_file_download() {
 			}
 		}
 		
-		$html = str_get_html($html);
+		$html = pmpt_str_get_html($html);
 		if(!empty($html)) {
 			foreach($html->find('img') as $element) {
 				$url = $element->src;
