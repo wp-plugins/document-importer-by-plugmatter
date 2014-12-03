@@ -182,8 +182,8 @@ class DOC_CONVERTER {
             }
         }        
         
-        require_once( plugin_dir_path( __FILE__ ) . '/pmpt_simple_html_dom.php');
-        $html = pmpt_str_get_html($htmloutput);
+        require_once( plugin_dir_path( __FILE__ ) . '/pmdi_simple_html_dom.php');
+        $html = pmdi_str_get_html($htmloutput);
 
         foreach($html->find('a') as $a) {    
             $link_rid = $a->href;

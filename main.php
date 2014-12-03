@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Document Importer Lite
 Plugin URI: http://plugmatter.com/
 Description: The simplest and quickest way to import your docx files into WordPress Editor without losing the document formatting. Spend more time writing and not formatting it in WordPress editor.
 Author: Plugmatter
-Version: 1.4.3
+Version: 1.4.4
 Author URI: http://plugmatter.com/document-importer
 */
 
@@ -128,9 +128,9 @@ function pmdi_google_file_download() {
 	if(isset($_GET['code'])) {
 		echo "<div style='margin:auto;margin: 40% auto auto; font-family: arial ,sans-serif; text-align: center;font-size:12px;color:gray;'><p>PROCESSING DOCUMENT</p><img id='' src='". plugins_url('/images/loading.GIF', __FILE__) ."' /></div>";       	       			
 		$client->setAccessToken($client->getAccessToken($_SESSION['token']));	
-		require_once( plugin_dir_path( __FILE__ ) . '/pmpt_simple_html_dom.php');
+		require_once( plugin_dir_path( __FILE__ ) . '/pmdi_simple_html_dom.php');
 		$html_str = downloadFile($service, $_GET['state']);		
-		$html = pmpt_str_get_html($html_str);
+		$html = pmdi_str_get_html($html_str);
 		$i = 1;
 		$time = time();
 		// Find all images
@@ -162,7 +162,7 @@ function pmdi_google_file_download() {
 			}
 		}
 		
-		$html = pmpt_str_get_html($html);
+		$html = pmdi_str_get_html($html);
 		if(!empty($html)) {
 			foreach($html->find('img') as $element) {
 				$url = $element->src;
