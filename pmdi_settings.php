@@ -61,7 +61,8 @@
 	<div class='pmadmin_body'  style="position:relative">
 		<br>
 		<br>
-        <a href='http://plugmatter.com/document-importer' target='_blank'>Upgrade</a> to enable Google Drive & Dropbox.
+        <h3>Congratulations! You're now good to go.</h3>
+		<h3>Start Importing ".docx" Word Documents from your computer <a href="<?php echo get_option('siteurl'); ?>/wp-admin/post-new.php">Go to New Post</a> </h3>
         If you need any help, <a href='mailto:support@plugmatter.com' target="_blank"><b>shoot us an email</b></a> and we will be glad to help you out.
 		<br><br>
 	</div>
