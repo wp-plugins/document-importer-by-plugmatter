@@ -65,9 +65,9 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
 	?>
 	<div class='pmadmin_body'  style="position:relative">
         <br>
-        <b>Congratulations! You have successfully installed the Plugin.        
-        <br><br>
-        <a href='http://plugmatter.com/document-importer' target='_blank'>Upgrade</a> to enable Google Drive & Dropbox.
+		<br>
+        <h3>Congratulations! You're now good to go.</h3>
+		<h3>Start Importing ".docx" Word Documents from your computer <a href="<?php echo get_option('siteurl'); ?>/wp-admin/post-new.php">Go to New Post</a> </h3>
         If you need any help, <a href='mailto:support@plugmatter.com' target="_blank"><b>shoot us an email</b></a> and we will be glad to help you out.
 		<br><br>
 
@@ -77,14 +77,16 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
 	?>
 	<div class='pmadmin_body'  style="position:relative">
         <br>
-        <b>Congratulations! You have successfully installed the Plugin.
+        <h3>Congratulations! You're now good to go.</h3>
+		<h3>Quickly Import ".docx" Word Documents from your computer by going to New Post / Page. </h3>
+		<img class="pmdi_license_img" src="<?php echo plugins_url('/images/pmdi_settings.png', __FILE__); ?>">
 		<div class="pmadmin_submit">
-			<input id="submit" class="pm_primary_buttons" type="submit" value=" Get Started " onclick="location.href='<?php echo get_option('siteurl'); ?>/wp-admin/admin.php?page=pmdi_settings'" name="submit">
+			<input id="submit" class="pm_primary_buttons" type="submit" value=" Get Started " onclick="location.href='<?php echo get_option('siteurl'); ?>/wp-admin/post-new.php'" name="submit">
 		</div>        
         <br><br>
         To configure Google Docs and Dropbox integeration please follow the <a href='http://plugmatter.com/document-importer/user-guide'>User Guide</a>.
         If you need any help, <a href='mailto:support@plugmatter.com' target="_blank"><b>shoot us an email</b></a> and we will be glad to help you out.
-		<br><br>	
+		<br><br>
 	<?php }
 	} else {
 	?>

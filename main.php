@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Document Importer Lite
 Plugin URI: http://plugmatter.com/
 Description: The simplest and quickest way to import your docx files into WordPress Editor without losing the document formatting. Spend more time writing and not formatting it in WordPress editor.
 Author: Plugmatter
-Version: 1.4.5
+Version: 1.4.6
 Author URI: http://plugmatter.com/document-importer
 */
 
@@ -419,13 +419,16 @@ function pmdi_dropbox( $good_protocol_url, $original_url, $_context){
 
 /* Display the post meta box. */
 function pmdi_post_class_meta_box( $object, $box ) { 
+	echo "<script type='text/javascript'>
+			var pmdi_site_url = '".get_option('siteurl')."';
+		  </script>";
 	wp_enqueue_script('jquery');
 	wp_register_script('dropboxjs','http://www.dropbox.com/static/api/2/dropins.js');
 	wp_enqueue_script('dropboxjs');
 	add_filter('clean_url','pmdi_dropbox',10,3);
-	wp_register_script( 'custom-script', plugins_url( '/js/custom-script.js', __FILE__ ) );		
+	wp_register_script( 'custom-script', plugins_url( '/js/custom-script.js', __FILE__ ), array('jquery') );		
 	wp_enqueue_script('custom-script');
-	wp_register_script( 'filepicker', plugins_url( '/js/filepicker.js', __FILE__ ) );		
+	wp_register_script( 'filepicker', plugins_url( '/js/filepicker.js', __FILE__ ), array('jquery') );		
 	wp_enqueue_script('filepicker');
 	$api_key = get_option('google_api_key');
 	wp_register_script('googlejs','https://www.google.com/jsapi?key='.$api_key);

@@ -75,7 +75,11 @@ jQuery("#dropbox_btn").click(function(){
             extensions: ['.docx'],
         });
     } else {
-        alert("Please Enter the Dropbox Api Key in Plugmatter DocImporter Settings and then click on this button");
+        if (confirm("Please configure Dropbox API by going to Settings > Document Importer by Plugmatter")) { 
+                location.href =  pmdi_site_url+'/wp-admin/admin.php?page=pmdi_settings';
+        }
+        return false;
+        //alert("Please Enter the Dropbox Api Key in Plugmatter DocImporter Settings and then click on this button");
     }
 });
 

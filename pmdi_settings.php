@@ -85,7 +85,31 @@
 			}
 
 		?>
-	<div class='pmdi_google_head'>Google API Settings</div>	
+
+		<div class="pmdi_head_img" id='pmdi_com_cont'>
+    		<div id="pmdi_com_set">
+	        	<img src="<?php echo plugins_url('/images/localdrive.png', __FILE__); ?>"> 
+	        	<div class="pmdi_google_head" id="pmdi_head_title">Import Documents from Computer</div>
+	        </div>
+
+        	<div class="pm_settings_submit">
+				<input id="submit" class="pm_primary_buttons" type="button" value="   Get started here   " onclick="location.href='<?php echo get_option('siteurl'); ?>/wp-admin/post-new.php'" name="submit">
+			</div>
+			<div class="pmdi_clear_float"></div>
+			<hr class="pmdi_hr_set">
+    	</div>
+    	<div style='margin:15px 20px 10px 40px;color:gray;background:#fff;padding:15px; width:650px;'>
+    		<img src="<?php echo plugins_url('/images/support.png', __FILE__); ?>" align='left' style='margin-right:10px;position:relative;'>
+    		To configure Google and Dropbox API, please follow our <a href='http://plugmatter.com/document-importer/user-guide'>User Guide</a>.
+        	If you need any help, <a href='mailto:support@plugmatter.com' target="_blank"><b>shoot us an email</b></a> and we will be glad to help you out.
+		</div>
+		
+		<div class="pmdi_head_img">
+			<img src="<?php echo plugins_url('/images/gdrive.png', __FILE__); ?>"> 
+			<div class='pmdi_google_head'>Google API Settings</div>
+	    	
+		</div>
+
 		<table class='pmdi_settings_table'>
 			<tr>
 				<td><p>Redirect URI</p></td>
@@ -116,7 +140,11 @@
 			</td>
 		</table>
 	</form>		
-			<div class='pmdi_dropbox_head'>DropBox API Settings</div>
+		<div class="pmdi_head_img">
+			<hr class="pmdi_hr_set">
+			<img src="<?php echo plugins_url('/images/dropbox.png', __FILE__); ?>"> 		
+			<div class='pmdi_google_head'>DropBox API Settings</div>
+		</div>
 	<form action="<?php $siteurl = get_option('siteurl');echo $siteurl."/wp-admin/admin.php?page=pmdi_settings"; ?>" id='pm_settings' method="post">	
 		<?php 
 			if($dropbox_details == "true") {

@@ -105,7 +105,7 @@ table p {
 }
 
 .pmdi_settings_table {
-    padding-left: 20px;
+    padding-left: 40px;
 }
 
 .pmdi_settings_table input[type="text"] {
@@ -128,4 +128,63 @@ table p {
     font-size:17px;
     padding-top:5px;
     color:#333333;
+}
+
+.pmdi_license_img {
+    width: 700px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.pmdi_head_img .pm_settings_submit {
+    float: right;
+}
+
+.pmdi_head_img {    
+    margin-top: 10px;
+    width: 720px;
+}
+
+.pmdi_head_img img {
+    width:30px;
+    height: 30px;
+    float: left;
+}
+
+.pmdi_head_img .pmdi_google_head {
+    margin-top: 10px;
+    display: table;
+    padding-top: 7px;
+    padding-left: 8px;
+}
+
+#pmdi_head_title {
+    float: left;
+    margin: 0;
+    width: 350px;
+}
+
+#pmdi_com_cont {
+    margin-top: 15px;
+    width: 720px;
+}
+
+#pmdi_com_set {
+    padding-top: 12px;
+    float: left;
+}
+
+.pmdi_clear_float {
+    clear: both;
+}
+
+.pmdi_hr_set {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    height: 2px;
+    width: 720px;
+}
+
+.pm_settings_submit #submit {
+    font-size: 12px;
 }
