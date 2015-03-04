@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Document Importer Lite
 Plugin URI: http://plugmatter.com/
 Description: The simplest and quickest way to import your docx files into WordPress Editor without losing the document formatting. Spend more time writing and not formatting it in WordPress editor.
 Author: Plugmatter
-Version: 1.4.7
+Version: 1.4.8
 Author URI: http://plugmatter.com/document-importer
 */
 
@@ -404,28 +404,19 @@ function local_file_upload() {
 	die(1);
 }
 
-/*Drop Box*/
-function pmdi_dropbox( $good_protocol_url, $original_url, $_context){
-    if ( FALSE === strpos($original_url, 'dropbox') or FALSE === strpos($original_url, '.js')) {
-        return $url;
-    } else {
-    	remove_filter('esc_url','pmdi_dropbox',10,3);
-      	$url_parts = parse_url($good_protocol_url);
-      	return $url_parts['scheme'] . '://' . $url_parts['host'] . $url_parts['path'] . "' id='dropboxjs' data-app-key='".get_option('wpmdi_dropbox_app_key');
-    }
-}
-
-
 
 /* Display the post meta box. */
 function pmdi_post_class_meta_box( $object, $box ) { 
-	echo "<script type='text/javascript'>
-			var pmdi_site_url = '".get_option('siteurl')."';
-		  </script>";
 	wp_enqueue_script('jquery');
 	wp_register_script('dropboxjs','http://www.dropbox.com/static/api/2/dropins.js');
 	wp_enqueue_script('dropboxjs');
-	add_filter('esc_url','pmdi_dropbox',10,3);
+    $dropbox_app_key = get_option('wpmdi_dropbox_app_key');
+	echo "<script type='text/javascript'>
+		var pmdi_site_url = '".get_option('siteurl')."';
+		jQuery(document).ready(function() {
+			Dropbox.appKey = \"$dropbox_app_key\";
+		});
+	      </script>";
 	wp_register_script( 'custom-script', plugins_url( '/js/custom-script.js', __FILE__ ), array('jquery') );		
 	wp_enqueue_script('custom-script');
 	wp_register_script( 'filepicker', plugins_url( '/js/filepicker.js', __FILE__ ), array('jquery') );		
