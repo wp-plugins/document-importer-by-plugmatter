@@ -66,13 +66,56 @@
         If you need any help, <a href='mailto:support@plugmatter.com' target="_blank"><b>shoot us an email</b></a> and we will be glad to help you out.
 		<br><br>
 	</div>
+	<div id="pmdi_xsl_set" class="pmdi_head_img">
+		<hr class="pmdi_hr_set">
+		<img src="<?php echo plugins_url('/images/xsl.png', __FILE__); ?>"> 
+		<div class='plug_di_enable_lable' style='width:400px;'>Using Remote XSLT Engine</div>
+
+		<div class='plug_di_tgl_btn'>
+			<input type="checkbox" id="" name="" class="switch" value='1' />
+			<label for="plug_di_xsl">&nbsp;</label>
+		</div>
+		<div style='clear:both'>&nbsp;</div>
+
+		<div style='margin:15px 20px 10px 40px;color:gray;background:#fff;padding:15px; width:650px;'>
+			<b>Document Importer LITE uses XSLT parsing engine hosted on our server to convert .DOCX to HTML, which costs us. Hence it restricts the number of imports to 8 per month. 
+<br><br>The paid packages comes with the XSLT parsing engine packed with it and hence provide unlimited document imports per month and improves the speed of 
+import drastically.
+<br><br>
+<a target="_blank" href='http://plugmatter.com/my/packages'>Upgrade</a> to enjoy fast and unlimited imports.
+			<br><br>
+
+		</div>
+		<hr class="pmdi_hr_set">
+	</div>	
 </div>
 <?php 
 	}
 
 	if(Plugmatter_DI_PACKAGE == "plugmatter_documentimporter_pro" || Plugmatter_DI_PACKAGE == "plugmatter_documentimporter_single") { 
 ?>
+<script type="text/javascript">
+jQuery(document).ready(function($){
+	jQuery("#plug_di_xsl_enable").click(function() {
+		var pmdi_xsl_enable;
+		if(jQuery(this).attr("checked") == "checked") {
+			pmdi_xsl_enable = "yes";
+		} else {
+			pmdi_xsl_enable = "no";
+		}
 
+		jQuery.ajax ({
+            type: "POST",
+            url: 'admin-ajax.php?action=pmdi_xsl',
+            dataType: 'text',
+            data: { 'pmdi_xsl_enable':pmdi_xsl_enable },
+            success: function(data){ 
+                    
+            }  
+        });
+	});
+});
+</script>
 <div class='pmdi_body'  style="position:relative">
 	<div class='pmdi_headbar'>
 		<div class='pmdi_pagetitle'><h2>General Settings</h2></div>
@@ -166,5 +209,26 @@
 			</tr>
 		</table>
 	</form>
+	<div id="pmdi_xsl_set" class="pmdi_head_img">
+		<hr class="pmdi_hr_set">
+		<img src="<?php echo plugins_url('/images/xsl.png', __FILE__); ?>"> 
+		<div class='plug_di_enable_lable' style='width:400px;'>Debug Mode (Use Remote XSLT Engine)</div>
+
+		<div class='plug_di_tgl_btn'>
+			<input type="hidden" name="plug_di_xsl_enable" value='0'/>
+			<input type="checkbox" id="plug_di_xsl_enable" name="plug_di_xsl_enable" class="switch" <?php if(get_option('pmdi_xsl_enable') == 'yes') echo "checked"; ?> value='1' />
+			<label for="plug_di_xsl_enable">&nbsp;</label>
+		</div>
+		<div style='clear:both'>&nbsp;</div>
+
+		<div style='margin:15px 20px 10px 40px;color:gray;background:#fff;padding:15px; width:650px;'>
+			<b>Getting XSLT error or blank document?</b> Try enabling our Debug Mode to use our remote XSLT engine for converting .DOCX to HTML.<br><br>
+			Note: The debug mode limits number of imports per month, affects import speed. Therefore it should be only used for test purpose.
+			<br><br>
+
+		</div>
+
+		<hr class="pmdi_hr_set">
+	</div>
 </div>
 <?php } ?>

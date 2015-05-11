@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Document Importer Lite
 Plugin URI: http://plugmatter.com/
 Description: The simplest and quickest way to import your docx files into WordPress Editor without losing the document formatting. Spend more time writing and not formatting it in WordPress editor.
 Author: Plugmatter
-Version: 1.4.8
+Version: 1.5.2
 Author URI: http://plugmatter.com/document-importer
 */
 
@@ -17,6 +17,9 @@ add_action( 'load-post-new.php', 'pmdi_setup' );
 add_action( 'admin_menu', 'pmdi_plugin_settings');
 add_action( 'wp_ajax_upload_docx', 'local_file_upload' );
 add_action( 'wp_ajax_dropbox_callback', 'pmdi_dropbox_file_download' );
+
+add_action( 'wp_ajax_pmdi_xsl', 'pmdi_xsl_enable' );
+
 add_action( 'wp_ajax_google_callback', 'pmdi_google_file_download' );
 add_action( 'content_save_pre', 'remove_empty_lines' );
 add_filter ('the_content', 'pmdi_signature');
@@ -77,22 +80,27 @@ function pmdi_setup() {
 function pmdi_meta_box() {
 	wp_register_style('pmdi_metabox_css', plugins_url('/css/meta_box.css', __FILE__));
 	wp_enqueue_style('pmdi_metabox_css');
-	add_meta_box(
-		'pmdi_post_class',			// Unique ID
-		'Document Importer',		// Title
-		'pmdi_post_class_meta_box',		// Callback function
-		'post',					// Admin page (or post type)
-		'side',					// Context
-		'high'					// Priority
-	);
-	add_meta_box(
-		'pmdi_post_class',			// Unique ID
-		'Document Importer',		// Title
-		'pmdi_post_class_meta_box',		// Callback function
-		'page',					// Admin page (or post type)
-		'side',					// Context
-		'high'					// Priority
-	);    
+	$post_types = get_post_types( array( 'public' => true ), 'names' ); 
+				
+	foreach ($post_types  as $post_type ) {		
+	
+		add_meta_box(
+			'pmdi_post_class',			// Unique ID
+			'Document Importer',		// Title
+			'pmdi_post_class_meta_box',		// Callback function
+			$post_type,					// Admin page (or post type)
+			'side',					// Context
+			'high'					// Priority
+		);
+	}  
+}
+
+function pmdi_xsl_enable() {
+	if($_POST['pmdi_xsl_enable']) {
+		echo ">>>".$pmdi_xsl_enable = $_POST['pmdi_xsl_enable'];
+		update_option( 'pmdi_xsl_enable', $pmdi_xsl_enable );
+		die();
+	}
 }
 
 function pmdi_google_file_download() {
@@ -355,6 +363,7 @@ function pmdi_dropbox_file_download() {
     		if($doc_data){
     			add_filter('the_content', 'remove_empty_tags_recursive', 20, 1);
     			$new_doc_data = remove_empty_tags_recursive ($doc_data);
+    			$new_doc_data = str_replace('< ![if !supportMisalignedColumns]>', '', $new_doc_data);
     			echo $new_doc_data;
     			if (file_exists($file)) {                  
             		unlink($file);            
@@ -370,6 +379,20 @@ die(1);
 }
 
 
+function catch_fatal_error() {
+  // Getting Last Error
+  $last_error =  error_get_last();
+ 
+  // Check if Last error is of type FATAL
+  if(isset($last_error['type']) && $last_error['type']==E_ERROR)   {  
+    // Fatal Error Occurs
+    // Do whatever you want for FATAL Errors
+    echo "Some fetal error has occurred";
+  }
+
+}
+
+
 function local_file_upload() {	
 	if ( ! function_exists( 'wp_handle_upload' ) ) require_once( ABSPATH . 'wp-admin/includes/file.php' );
 	$uploadedfile = $_FILES['plugmatter_browse_docx'];    			
@@ -379,7 +402,7 @@ function local_file_upload() {
 		$movefile = wp_handle_upload( $uploadedfile, $upload_overrides );
 		if ( $movefile ) {
     		if($movefile["error"]) {
-    			echo "Error:". $movefile;
+    			echo "Error:". $movefile["error"];
     		} else {    						
 				require_once( plugin_dir_path( __FILE__ ) . '/class.DOCX-HTML.php');				
 				$extract = new DOC_CONVERTER();
@@ -389,6 +412,7 @@ function local_file_upload() {
     			if($doc_data){    				
     				add_filter('the_content', 'remove_empty_tags_recursive', 20, 1);    				
     				$new_doc_data = remove_empty_tags_recursive ($doc_data);
+    				$new_doc_data = str_replace('< ![if !supportMisalignedColumns]>', '', $new_doc_data);
     				echo $new_doc_data;
     				unlink($movefile["file"]);
     			} else {
@@ -408,7 +432,7 @@ function local_file_upload() {
 /* Display the post meta box. */
 function pmdi_post_class_meta_box( $object, $box ) { 
 	wp_enqueue_script('jquery');
-	wp_register_script('dropboxjs','http://www.dropbox.com/static/api/2/dropins.js');
+	wp_register_script('dropboxjs','https://www.dropbox.com/static/api/2/dropins.js');
 	wp_enqueue_script('dropboxjs');
     $dropbox_app_key = get_option('wpmdi_dropbox_app_key');
 	echo "<script type='text/javascript'>
@@ -436,7 +460,18 @@ function pmdi_post_class_meta_box( $object, $box ) {
 	);
 	wp_localize_script( 'googlejs2', 'scriptParams', $script_params );
 	echo "<div class='pmdi_inside'><label for=\"pmdi_post_class\">Select a .docx File:</label>";
-	echo "<div id='pmdi_message'></div>";
+	echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp";
+	if(Plugmatter_DI_PACKAGE == 'plugmatter_documentimporter_lite' || get_option('pmdi_xsl_enable') == 'yes') {
+		$pmdi_api_count = get_option("pmdi_api_count");
+
+        if (trim($pmdi_api_count) == "") {
+            $pmdi_count = 0;
+        } else {
+            $pmdi_count = $pmdi_api_count;
+        }
+		echo "<label<b><span id='pmdi_import_count'>".$pmdi_count."</span>&nbsp;/&nbsp;8 &nbsp; Imports &nbsp; <a style='text-decoration:none;' href='http://plugmatter.com/document-importer' target='_blank'> ( ? ) </a></b></label>";
+	}
+	echo "<div style='color:red;' id='pmdi_message'></div>";
 	if(get_option('Plugmatter_di_License') == "" ) {
 		echo "<input disabled='disabled' type='button' id='plugmatter_import_docx_dis' style='background: url( ". plugins_url('/images/localdrive.png', __FILE__). ")' value=''>";
 		echo "<input disabled='disabled' type='button' id='google_btn_dis' style='background: url( ". plugins_url('/images/gdrive.png', __FILE__). ")' value=''>";
@@ -466,7 +501,7 @@ function pmdi_post_class_meta_box( $object, $box ) {
 			echo "<p id='pmdi_update_msg'><a href='http://plugmatter.com/document-importer' target='_blank'>Upgrade</a> to enable Google Drive & Dropbox</p>";
 		}
 	}
-	echo "<img id='pmdi_half_banner' src='http://plugmatter.com/images/pmdi/pmdi_half_banner.png' width='' height=''>";
+	echo "<img id='pmdi_half_banner' src='".plugins_url('/images/pmdi_half_banner.png', __FILE__)."' width='' height=''>";
 	echo '<input type="hidden" id="pmdi_hidden_field" name="pmdi_hidden_field" value="false">';
 }
 

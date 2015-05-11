@@ -188,3 +188,93 @@ table p {
 .pm_settings_submit #submit {
     font-size: 12px;
 }
+
+.plug_di_enable_lable {
+    color: #333333;
+    float: left;
+    font-size: 17px;
+    padding-top: 5px;
+    width: 300px;
+    font-weight: bold;
+    padding-left: 8px;
+}
+
+.plug_di_tgl_btn {
+    float: left;
+    width: 90px;
+}
+
+#pmdi_xsl_set img {
+    float: left;
+    height: 30px;
+    width: 30px;
+}
+
+/* --------------------- switch ------------------------------------- */
+
+input.switch:empty {
+    margin-left: -999px;
+}
+
+input.switch:empty ~ label {
+    position: relative;
+    float: left;
+    line-height: 1.6em;
+    margin: 0.2em 0;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input.switch:empty ~ label:before, 
+input.switch:empty ~ label:after {
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    content: ' ';
+    width: 61px;
+    height:24px;
+    background-color: gray;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 2px rgba(0,0,0,0.3);
+    -webkit-transition: all 100ms ease-in;
+    transition: all 100ms ease-in;
+    color:#ffffff;
+    font-family:arial;
+    font-weight:bold;
+    content:"";
+    padding:3px 0px 0px 10px;
+}
+
+input.switch:empty ~ label:after
+{
+    top: 2px;
+    bottom: 0.1em;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow:  0 1px 0 rgba(0,0,0,0.2);
+    width:15px;
+    height:20px;
+    content:"Off";
+    left:2px;
+    color:#333333;
+    padding:3px 12px 0px 10px;
+}
+
+input.switch:checked ~ label:before
+{
+    background-color: #CF1626;
+}
+
+input.switch:checked ~ label:after
+{
+    margin-left: 30px;
+    content:"On"
+}
+
+
+/*--------------------- messages --------------------------- */

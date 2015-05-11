@@ -5,6 +5,9 @@ jQuery(document).ready(function($) {
 
     $("#plugmatter_browse_docx").change(function(event) {
         $("#loading").show();
+        var import_count = $("#pmdi_import_count").text();
+        import_count = parseInt(import_count, 10) + 1;
+        $("#pmdi_import_count").text(import_count);
         $("body").append("<iframe id='upload_iframe' name='upload_iframe' width='0' height='0' border='0'>");
         $("#frm_uploader").submit(); 
 
@@ -14,7 +17,12 @@ jQuery(document).ready(function($) {
                 $("#pmdi_message").text(result.split(":")[1]);
                 $("#loading").hide();
             } else {
-                $("#content_ifr").contents().find('body').html(result);
+                if($("#content_ifr").length == 0) {
+                    $("#content").html(result);
+                } else {
+                    $("#content_ifr").contents().find('body').html(result); 
+                }
+                
                 $("#pmdi_hidden_field").val("true");
                 $("#loading").hide();
             }
@@ -47,6 +55,9 @@ jQuery("#dropbox_btn").click(function(){
                             data: { 'dropbox_url':dropbox_url },
                             success: function(data){ // any action to be performed after function.php returns a value.
                                 jQuery("#content_ifr").contents().find('body').html(data);
+                                var import_count = $("#pmdi_import_count").text();
+                                import_count = parseInt(import_count, 10) + 1;
+                                $("#pmdi_import_count").text(import_count);
                                 jQuery("#loading").hide();
                             },
                             dataType: 'text'

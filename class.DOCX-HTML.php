@@ -22,6 +22,11 @@ class DOC_CONVERTER {
         $file_path = wp_upload_dir();
         $targetDir = $file_path['path'] ."/doccontents";
         $this->tempDir = $targetDir;
+
+        if(file_exists($targetDir)) {
+            $this->rrmdir($targetDir); 
+        } 
+
         unzip_file( $this->docxPath, $targetDir);         
         $sourcedir = $file_path['path'] ."/doccontents/word/media/";
         $destdir = $file_path['path']."/";
@@ -112,56 +117,71 @@ class DOC_CONVERTER {
       
     function extractXML() {
 
-    	$xmlFile = $this->tempDir."/word/document.xml";        
-		$xml = new DOMDocument();
-		$xml->load($xmlFile);
+    	$xmlFile = $this->tempDir."/word/document.xml";  
 
-		$xsl = new DOMDocument();
-        //include( plugin_dir_path( __FILE__ ) . '/class.DOCX-HTML.php');
-		$xsl->load(plugin_dir_path( __FILE__ ) .'DocX2Html.xslt');
-		$proc = new XSLTProcessor();
-		$proc->importStyleSheet($xsl); 
-    	$htmloutput = $proc->transformToXML($xml);   	
+		$pmdi_key = get_option("Plugmatter_di_License");
+
+        if(Plugmatter_DI_PACKAGE == 'plugmatter_documentimporter_lite' || get_option('pmdi_xsl_enable') == 'yes') {
+
+            $xml = file_get_contents($this->tempDir."/word/document.xml"); 
+
+            $pmdi_key = get_option("Plugmatter_di_License");
+
+            $pmdi_api_count = get_option("pmdi_api_count");
+
+
+            $parse_html_url = 'http://api.plugmatter.com/pmdi/parsexml.php';
+
+            $response = wp_remote_post( $parse_html_url, array(
+                            'method' => 'POST',
+                            'timeout' => 45,
+                            'redirection' => 5,
+                            'httpversion' => '1.0',
+                            'blocking' => true,
+                            'headers' => array(),
+                            'body' => array('file_contents' => $xml, 'pmdi_key' => $pmdi_key, 'package' => Plugmatter_DI_PACKAGE ),
+                            'cookies' => array()
+                            )
+                        );
+
+            if ( is_wp_error( $response ) ) {
+               $error_message = $response->get_error_message();
+               echo "Something went wrong: $error_message";
+            } else {
+                $result = json_decode($response['body'], true);
+                if($result["status"] == "error") {
+                    echo $result["message"];
+                    exit;
+                } 
+
+                if($result["status"] == "success") {
+                    $htmloutput = stripslashes($result["data"]);
+                    update_option("pmdi_api_count", $result["count"]);
+                }
+               
+            }
+        } else {
+            $xml = new DOMDocument();
+            $xml->load($xmlFile);
+
+            $xsl = new DOMDocument();
+
+            $xsl->load(plugin_dir_path( __FILE__ ) .'DocX2Html.xslt');
+
+            try {
+              register_shutdown_function("catch_fatal_error");
+              $proc = new XSLTProcessor;
+            } catch (Exception $e) {
+                echo "xsl is not enable on your hosting server Please enable Remote XSL Which is under Plugmatter Document Importer Settings Page";
+            }
+
+            $proc->importStyleSheet($xsl); 
+            $htmloutput = $proc->transformToXML($xml);      
+        }
     	
 		$img_patern = "'src\s*=\s*([\"\'])?(?(1) (.*?)\\1 | ([^\s\>]+))'isx";    	
     	preg_match_all($img_patern, $htmloutput, $docimgs);
     	    
-  /*  	$idImgs = array();
-        foreach ($docimgs[0] as $dats) {
-            $datsFiltered = explode('"', $dats);
-            if (preg_match('/^\?image=rId/', $datsFiltered[1])) {
-                $datFiltered = explode('?image=', $dats);
-                $idImgs[] = substr($datFiltered[1], 0, -1);
-            }
-        }
-
-
-  
-   		$xmlrels = $this->tempDir."/word/_rels/document.xml.rels";
-   		$rels_val = file_get_contents($xmlrels);
-   		$relationsImgs = simplexml_load_string($rels_val);
-        $pathImgs = array();
-        $img_type = array();
-        foreach ($relationsImgs->Relationship as $relImg) {        	
-            if ($relImg["Type"] == "http://schemas.openxmlformats.org/officeDocument/2006/relationships/image") {            	
-                $pathImgs[(string) $relImg["Id"]] = (string) $relImg["Target"];
-                $img_name = explode("/",$pathImgs[(string) $relImg["Id"]]);
-                $img_type[(string) $relImg["Id"]] = $img_name[1];                       
-            }
-        } 
-        
-   		$file_path = wp_upload_dir();
-       
-        foreach ($idImgs as $datsIdImgs) {
-                	$htmloutput = str_replace(
-                		      "src=\"?image=$datsIdImgs\"",
-                		      "src=\"" .
-                		      $file_path['url']."/".$this->time."_".$img_type[$datsIdImgs]."\"",         		
-                		      $htmloutput
-            	   		  );                   
-        } 
-
-        */
         $file_path = wp_upload_dir();
 
         foreach ($docimgs[0] as $dats) {
@@ -185,17 +205,21 @@ class DOC_CONVERTER {
         require_once( plugin_dir_path( __FILE__ ) . '/pmdi_simple_html_dom.php');
         $html = pmdi_str_get_html($htmloutput);
 
-        foreach($html->find('a') as $a) {    
-            $link_rid = $a->href;
-            $url = $this->rels[$link_rid][0];
-            $html = str_replace(
-                                    "href=\"$link_rid\"",
-                                    "href=\"$url\"",              
-                                      $html
-                                  );
-        }
+        if($html) {
+            foreach($html->find('a') as $a) {    
+                $link_rid = $a->href;
+                $url = $this->rels[$link_rid][0];
+                $html = str_replace(
+                                        "href=\"$link_rid\"",
+                                        "href=\"$url\"",              
+                                          $html
+                                      );
+            }
 
-        preg_match('/<body(.*)<\/body>/s', $html, $matches);       
+            preg_match('/<body(.*)<\/body>/s', $html, $matches);       
+        } else {
+            preg_match('/<body(.*)<\/body>/s', $htmloutput, $matches);
+        }
        // $pattern = "/<p[^>]*><\\/p[^>]*>/";
         //$newstr = preg_replace($pattern, '', $matches[0]);        
         

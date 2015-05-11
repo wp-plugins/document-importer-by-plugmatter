@@ -89,3 +89,8 @@ img#loading {
 #pmdi_names .pmdi_p_gray {
     color: gray;
 }
+
+#pmdi_message {
+	color: red;
+	font-weight: bold;
+}
