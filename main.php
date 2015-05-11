@@ -4,7 +4,7 @@ Plugin Name: Plugmatter Document Importer Lite
 Plugin URI: http://plugmatter.com/
 Description: The simplest and quickest way to import your docx files into WordPress Editor without losing the document formatting. Spend more time writing and not formatting it in WordPress editor.
 Author: Plugmatter
-Version: 1.5.2
+Version: 1.5.3
 Author URI: http://plugmatter.com/document-importer
 */
 

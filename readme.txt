@@ -4,7 +4,7 @@ Donate link: http://plugmatter.com/
 Tags: document importer, word document importer, docx, MS Word, Microsoft Word, Google Docs, Dropbox, WordPress Visual Editor, Formatting, Content Formatting
 Requires at least: 3.7.0
 Tested up to: 4.2.1 and above
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 License: Free
 License URI: http://plugmatter.com/document-importer/
 
@@ -163,6 +163,11 @@ No. Document Importer by Plugmatter is not compatible with WordPress.com (the ho
 
 == Changelog ==
 
+### Version 1.5.3 ###
+
+* Minor changes in settings page
+
+
 ### Version 1.5.2 ###
 
 * Minor fixes
@@ -244,4 +249,4 @@ Enhanced multiple browser compatibility
 Initial Commit
 
 == Upgrade Notice ==
-There's a new version of Plugmatter Document Importer Lite i.e., version 1.5.2
+There's a new version of Plugmatter Document Importer Lite i.e., version 1.5.3

@@ -67,7 +67,11 @@ if(isset($_POST["license_key"] ) && ($_POST["license_key"]!="")) {
         <br>
 		<br>
         <h3>Congratulations! You're now good to go.</h3>
-		<h3>Start Importing ".docx" Word Documents from your computer <a href="<?php echo get_option('siteurl'); ?>/wp-admin/post-new.php">Go to New Post</a> </h3>
+        <h3>Quickly Import ".docx" Word Documents from your computer by going to New <a href="<?php echo get_option('siteurl'); ?>/wp-admin/post-new.php"> Post </a> /
+        	<a href="<?php echo get_option('siteurl'); ?>/wp-admin/post-new.php?post_type=page"> Page </a>. </h3>
+		<img class="pmdi_license_img" src="<?php echo plugins_url('/images/pmdi_settings.png', __FILE__); ?>">
+		<h3></h3>
+		<!-- <h3>Start Importing ".docx" Word Documents from your computer <a href="<?php //echo get_option('siteurl'); ?>/wp-admin/post-new.php">Go to New Post</a> </h3> -->
         If you need any help, <a href='mailto:support@plugmatter.com' target="_blank"><b>shoot us an email</b></a> and we will be glad to help you out.
 		<br><br>
 

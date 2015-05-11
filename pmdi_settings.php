@@ -58,14 +58,93 @@
 		<div class='pmdi_pagetitle'><h2>General Settings</h2></div>
 	    <div class='pmdi_logodiv'><img src='<?php echo plugins_url("/images/logo.png", __FILE__);?>' height='35'></div>
 	</div>
-	<div class='pmadmin_body'  style="position:relative">
-		<br>
-		<br>
-        <h3>Congratulations! You're now good to go.</h3>
-		<h3>Start Importing ".docx" Word Documents from your computer <a href="<?php echo get_option('siteurl'); ?>/wp-admin/post-new.php">Go to New Post</a> </h3>
-        If you need any help, <a href='mailto:support@plugmatter.com' target="_blank"><b>shoot us an email</b></a> and we will be glad to help you out.
-		<br><br>
+	
+
+
+	<div class='pmdi_body'  style="position:relative">
+
+		<div class="pmdi_head_img" id='pmdi_com_cont'>
+    		<div id="pmdi_com_set">
+	        	<img src="<?php echo plugins_url('/images/localdrive.png', __FILE__); ?>"> 
+	        	<div class="pmdi_google_head" id="pmdi_head_title">Import Documents from Computer</div>
+	        </div>
+
+        	<div class="pm_settings_submit">
+				<input id="submit" class="pm_primary_buttons" type="button" value="   Get started here   " onclick="location.href='<?php echo get_option('siteurl'); ?>/wp-admin/post-new.php'" name="submit">
+			</div>
+			<div class="pmdi_clear_float"></div>
+			<hr class="pmdi_hr_set">
+    	</div>
+    	<div style='margin:15px 20px 10px 40px;color:gray;background:#fff;padding:15px; width:650px;'>
+    		<img src="<?php echo plugins_url('/images/support.png', __FILE__); ?>" align='left' style='margin-right:10px;position:relative;'>
+    		<a href='http://plugmatter.com/document-importer#plans&pricing'>Upgrade</a> and start importing documents from Google Docs and Dropbox.
+        	If you need any help, <a href='mailto:support@plugmatter.com' target="_blank"><b>shoot us an email</b></a> and we will be glad to help you out.
+		</div>
+		<div id="wrap_stngs" style="position:relative;margin-top:30px; padding-top: 1px; padding-bottom:10px;">
+		
+			<div class="pmdi_head_img">
+				<img src="<?php echo plugins_url('/images/gdrive.png', __FILE__); ?>"> 
+				<div class='pmdi_google_head'>Google API Settings</div>
+		    	
+			</div>
+
+			<table class='pmdi_settings_table'>
+				<tr>
+					<td><p>Redirect URI</p></td>
+					<td></td>
+					<td><input readonly type='text' name='wpmdi_redirect_uri' size=45 value = "<?php echo site_url().'/wp-admin/admin-ajax.php?action=google_callback'; ?>" ></td>
+					<td><?php// echo $redirecturi_err; ?></td>
+				</tr>
+				<tr style='padding-bottom: 20px;'>
+					<td><p>Client Id</p></td>
+					<td></td>
+					<td><input type='text' name='wpmdi_client_id' size=45 value = "<?php echo get_option('wpmdi_client_id'); ?>" ></td>
+					<td><?php echo $clientid_err; ?></td>
+				</tr>
+				<tr>
+					<td><p>Client Secret</p></td>
+					<td></td>
+					<td><input type='text' name='wpmdi_client_secret' size=45 value = "<?php echo get_option('wpmdi_client_secret'); ?>" ></td>
+					<td><?php echo $client_secret_err; ?></td>
+				</tr>			
+				<tr>
+					<td><p>API Key</p></td>
+					<td></td>
+					<td><input type='text' name='google_api_key' size=45 value = "<?php echo get_option('google_api_key'); ?>" ></td>
+					<td><?php echo $api_key_err; ?></td>
+				</tr>
+				<td colspan='4' >
+					<input style='background-color: #ccc; background-image: none;' id='pmdi_google_submit' class='pmdi_settings_btn' name='google-submit' type='submit' value=' Save Settings '>
+				</td>
+			</table>
+		
+			<div class="pmdi_head_img">
+				<hr class="pmdi_hr_set">
+				<img src="<?php echo plugins_url('/images/dropbox.png', __FILE__); ?>"> 		
+				<div class='pmdi_google_head'>DropBox API Settings</div>
+			</div>
+		
+			
+			<table class='pmdi_settings_table'>
+				<tr>
+					<td><p>App Key</p></td>
+					<td style='width:125px;'></td>
+					<td><input type='text' name='wpmdi_dropbox_app_key' size=20 value = "<?php echo get_option('wpmdi_dropbox_app_key'); ?>" ></td>
+					<td><?php echo $dropbox_appkey_err; ?></td>
+				</tr>
+				<tr>
+					<td colspan='4' >
+						<input style='background-color: #ccc; background-image: none;' id='pmdi_google_submit' class='pmdi_settings_btn' name='dropbox-submit' type='submit' value=' Save Settings '>
+					</td>
+				</tr>
+			</table>
+			<div id="wrap_stngs_layer" style="position:absolute;width:750px;left:-12px;top:0;bottom:0;background-color:rgba(0, 0, 0, 0.15);">	
+			</div>
+		</div>
 	</div>
+
+
+
 	<div id="pmdi_xsl_set" class="pmdi_head_img">
 		<hr class="pmdi_hr_set">
 		<img src="<?php echo plugins_url('/images/xsl.png', __FILE__); ?>"> 
